@@ -1,0 +1,52 @@
+@font-face {
+	src: url("Quartz Regular.ttf");
+	font-family: Regular;
+}
+
+#my-graph {
+  height: 100%;
+  background: #eee;
+  color: #000;
+}
+
+.graph-system__stats_arc{
+	background: url('img/left_arc.png') center center no-repeat;
+}
+
+.graph-system__stats__center{
+	background:url('img/middle_arc.png') center center no-repeat;
+}
+
+.graph-system__stats__1{
+	background:url('img/1.png') center center no-repeat;
+}
+
+.graph-system__stats__2{
+	background:url('img/2.png') center center no-repeat;
+}
+
+.graph-system__stats__3{
+	background:url('img/3.png') center center no-repeat;
+}
+
+.graph-system__stats__4{
+	background:url('img/4.png') center center no-repeat;
+}
+
+.graph-system__stats__5{
+	background:url('img/5.png') center center no-repeat;
+}
+
+.graph-system__stats__middle_square{
+	background: url(img/middle_text.png);
+	background-size: 100% 100%;
+	
+}
+
+.graph-system__stats__1_text,.graph-system__stats__2_text,.graph-system__stats__3_text,.graph-system__stats__4_text,.graph-system__stats__5_text{
+	font-family: Regular;
+	color: #1cdaca;
+	position: relative;
+	top: 1px;
+	font-weight: 800;
+}

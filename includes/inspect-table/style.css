@@ -1,0 +1,101 @@
+.gradient-table {
+  width: 100%;
+  padding: 0 1em;
+  box-sizing: border-box;
+}
+
+.graph-inner-bd {
+  margin-top: 1.5em;
+  font-size: 1.125em;
+}
+
+.gtable-hd-row,
+.gtable-bd-row  {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  position: relative;
+}
+
+.gtable-bd-row {
+  margin-top: .6em;
+}
+
+.gtable-hd-row li,
+.gtable-bd-row li {
+  flex: 1;
+  text-align: center;
+  z-index: 2;
+  padding: .6em 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gtable-hd-row li:nth-child(3),
+.gtable-hd-row li:nth-child(4),
+.gtable-bd-row li:nth-child(3),
+.gtable-bd-row li:nth-child(4) {
+  flex: 1.5;
+}
+
+.gtable-hd-row:before,
+.gtable-hd-row:after,
+.gtable-bd-row:before,
+.gtable-bd-row:after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  bottom: 0; right: 0;
+  z-index: 0;
+  border-radius: 1000px;
+}
+
+.gtable-hd-row:before {
+  background: linear-gradient(to right, #B29D42, #2C65B2);
+}
+
+.gtable-hd-row:after {
+  z-index: 1;
+  background: #293238;
+  --bw: 2px;
+  left: var(--bw); right: var(--bw); top: var(--bw); bottom: var(--bw);
+}
+
+.gtable-bd-row:before {
+  background: linear-gradient(to right, #2E2811, #2B65B2);
+}
+
+.gtable-bd-row:after {
+  z-index: 1;
+  background: #080809;
+  --bw: 1px;
+  left: var(--bw); right: var(--bw); top: var(--bw); bottom: var(--bw);
+}
+
+.progress {
+  display: inline-block;
+  width: 5em;
+  border-radius: 100px;
+  height: 1em;
+  background: #283137;
+  margin-right: .2em;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress:after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  border-radius: 0 100px 100px 0;
+  width: 50%;
+  background: #32ADC8;
+}
+
+
+.gtable-bd-row li:nth-child(4) .progress:after {
+  background: #1DDACA;
+}

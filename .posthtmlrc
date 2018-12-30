@@ -1,0 +1,9 @@
+{
+  "recognizeSelfClosing": true,
+  "lowerCaseAttributeNames": false,
+  "plugins": {
+    "posthtml-extend": {
+      "root": "./includes"
+    }
+  }
+}

@@ -1,0 +1,361 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.datascreen";
+option java_outer_classname = "DataScreenProto";
+option objc_class_prefix = "HLW";
+package datascreen;
+
+// The greeting service definition.
+service DataScreenService {
+// Sends a greeting
+	rpc SayHello (HelloRequest) returns (HelloReply) {
+	}
+	//侧屏获取防火墙等数据
+	rpc getNumber (stream StateGridRequest) returns (stream NumberReply) {
+	}
+	//侧屏国调安全拓扑告警数和名，侧屏右侧
+	rpc getSecureTopology (stream StateGridRequest) returns (stream
+	SecureTopologyReply) {
+	}
+	// 侧屏拓扑图报警从哪到哪
+    rpc getLargenTopology (stream StateGridRequest) returns (stream
+	LargenArrayProtobuf) {
+	}
+	//侧屏国调监视 线图
+	rpc getMenaceMonitorProto (stream StateGridRequest) returns (stream
+	AllDateReply) {
+	}
+	// 国调告警监视 6个参数 外部威胁、主站威胁、外设接入、异常登录、高危操作、外部访问  add by dongl
+	rpc bidirectionalMainStation (stream StateGridRequest) returns (stream
+	RunStateReply) {
+	}
+	// 本级+下级全网告警监视 4个参数 外设接入、异常登录、高危操作、外部访问  add by dongl
+	rpc bidirectionalAllStation (stream StateGridRequest) returns (stream
+	RunAllStateReply) {
+	}
+	// 首页安全合规率  add by dongl
+	rpc bidirectionalSafetyCompliance (stream StateGridRequest) returns (stream
+	SafetyComplianceReply) {
+	};
+	// 侧屏在线率 密通率 2个饼状图图形 add by dongl
+	rpc bidirectionalOnlineRateAndSecretPassRate (stream StateGridRequest) returns
+	(stream OnlineRateAndSecretPassReply) {
+	}
+
+	//国调最新安全事件本级
+	rpc bidrectionalSecurityEvent (stream StateGridRequest) returns (stream
+	SecurityEventReply) {
+	}
+	//国调最新安全事件下级
+	rpc bidrectionalSubSecurityEvent (stream StateGridRequest) returns (stream
+	SecurityEventReply) {
+	}
+	//大屏地图  add shichf
+	rpc bidirectionalDrawingMapsFormat (stream StateGridRequest) returns (stream
+	DrawingMapsForParameters) {
+	}
+	// 大屏安防系统及设备在线状态 add shichf
+	rpc screenSecuritySystemState (stream StateGridRequest) returns (stream
+	SecuritySystemStateForParameters) {
+	}
+	// 大屏网络安全运行水平 add shichf
+	rpc screenSecretPassOnlineRate (stream StateGridRequest) returns (stream
+	ScreenSecretPassOnlineRateForParameters) {
+	}
+	// 当日安全风险top10 add shichf
+	rpc screenDayRiskTOPTen (stream StateGridRequest) returns (stream
+	ScreenDayRiskTOPTenForParameters) {
+	}
+	// 发生威胁单位top10 add shichf
+	rpc screenDayRiskUnitTOPTen (stream StateGridRequest) returns (stream
+	ScreenDayRiskTOPTenForParameters) {
+	}
+	//显示值班员
+    rpc getOnDutyPerson(stream StateGridRequest) returns (stream OnDutyPersion){}
+    //显示值班员
+    rpc getRiskWarning(stream StateGridRequest) returns (stream RiskWarningProto){}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+	string name = 1;
+}
+// The response message containing the greetings
+message HelloReply {
+	string message = 1;
+}
+
+message StateGridRequest {
+string name =1;//撰取数据参数，省级区域的名字
+}
+//从MONITOROBJECT表中  取出MONITOROBJECTTYPE为0 1 4 5 6 的 数据 总和
+
+message NumberReply {
+	int32 IDS = 1; //MONITOROBJECT.MONITOROBJECTTYPE= 1
+	int32 FW = 2; //MONITOROBJECT.MONITOROBJECTTYPE= 0
+	int32 FID = 3; //MONITOROBJECT.MONITOROBJECTTYPE= 4
+	int32 BID = 4; //MONITOROBJECT.MONITOROBJECTTYPE= 5
+	int32 VEAD = 5; //MONITOROBJECT.MONITOROBJECTTYPE= 6
+}
+message SecureTopologyReply{
+	repeated  AlarmNameAndNumberReply alarmNameAndNumberArrayProtobuf = 1;
+	repeated  PropertyDataAndOftenReply propertyDataAndOftenArrayProtobuf = 2;
+}
+//--拓扑的告警数量 id 名字
+message AlarmNameAndNumberReply {
+	 string id = 1;
+	 string num = 2;
+	 string ip = 3;
+	 string devicename = 4;
+	 string nodename = 5;
+
+}
+//安全拓扑的数据
+message PropertyDataAndOftenReply {
+	string id = 1;
+	string cpurate = 2;
+	string monitorobjecttype = 3;
+	string cpuupperlimit = 4;
+	string memupperlimit = 5;
+	string memrate = 6;
+	string securityarea = 7;
+	string ip =8;
+	string runstate = 9;//侧屏右侧拓扑图，增加设备时候离线状态（0离线，1在线，2未投入使用）
+}
+//威胁监视
+message MenaceMonitorReply {
+
+	repeated ChangeRedArrayProtobuf changeRedArrayProtobuf = 1;
+	repeated LargenArrayProtobuf LargenArrayProtobuf = 2;
+	repeated PowerArrayProtobuf powerArrayProtobuf = 3;
+	repeated RedWireArrayProtobuf redWireArrayProtobuf = 4;
+}
+
+//变红告警
+message ChangeRedArrayProtobuf {
+	string remark = 1; //告警时间 REALTIME_WARNING
+	string regional = 2; // 告警 id MONITOROBJECT id
+	string shortname = 3; //告警名字 MONITOROBJECT name
+	string voltageclas = 4;
+	string addOrNo = 5; //true 是有增加  flase 没有
+	string warningtime = 6;
+}
+//字体变大告警
+message LargenArrayProtobuf {
+
+	repeated  Remoteprovince remoteprovince = 1; // REALTIME_WARNING id
+
+}
+message Remoteprovince{
+	string remoteprovince =1;
+}
+
+message PowerArrayProtobuf {
+	string remark = 1; //jsqy  remark
+	string shortname = 2; //jsqy  shortname
+	string dispatchtype = 3; //类型 2 是 电厂 3 是 变电站 JSQY
+	string regional = 4;
+}
+//红线取QTTMCDEVINFO表中DEVICESTATE不等于1的数据
+message RedWireArrayProtobuf {
+	string shadowid = 1; // MULTIPLEMONITOROBJECT shadowid
+	string ip = 2; //MULTIPLEMONITOROBJECT  ip
+	string nodename = 3; //MULTIPLEMONITOROBJECT nodename
+	string devicestate = 4;
+	string regional =5;
+}
+message AllDateReply{
+	repeated AllDateArrayProtobuf allDateArrayProtobuf = 1;
+
+}
+message AllDateArrayProtobuf{
+	string remark = 1;
+	string regional = 2;//
+	string shortname = 3 ;
+	string voltageclas = 4;
+	string addOrNo = 5;//
+	string voltageclass = 6;
+	string remotelocal = 7;
+	string dispatchtype =8;
+	string shadowid = 9;
+	string ip = 10;
+	string nodename = 11;
+	string devicestate = 12;//
+    string warningtime = 13 ;
+    string warningType = 14;//告警类型，如果没有告警传空字符串''，如果有告警紧急传字符串0，重要传1
+
+}
+//密通率、在线率  add by dongl
+message OnlineRateAndSecretPassReply{
+	OnlineRateAndSecretPass onelineRateAndSecretPass =1 ;
+}
+
+message OnlineRateAndSecretPass{
+	string onlineRate= 1; //在线率 DATA_DEVONLINERATE_REAL表  sum(ONLINE)/sum(ONLINE+OFFLINE)
+	string onlineRateColor =2;//1:95以上用绿色;2:90-95字体和圆圈用黄色;3:90以下，字体和圆圈红色 
+	string secretPass =3;//密通率 DATA_VEADENCRYPTEDRATE_REAL表   SUM(ENCRYPTPACKAGE) / (SUM(DECRYPTPACKAGE) + SUM(ENCRYPTPACKAGE))
+	string secretPassColor =4;//1:95以上用绿色;2:90-95字体和圆圈用黄色;3:90以下，字体和圆圈红色
+}
+//安全合规率  add by dongl
+message SafetyComplianceReply{
+	SafetyCompliance safetyCompliance = 1;
+}
+//安全合规率 对应视图 VIEW_CHECKNUM 10个字段  add by dongl
+message SafetyCompliance{
+	int32 CVSLegalNum =1 ; //基线核查合规项个数   VIEW_CHECKNUM  CVSLEGALNUM
+	int32 CVSIlegalNum =2 ; //基线核查不合规项个数   VIEW_CHECKNUM  CVSILEGALNUM
+	int32 VBSNum = 3 ; //漏洞扫描主机设备个数  VIEW_CHECKNUM  VBSNUM 
+	int32 VBSIlegalNum =4;//漏洞扫描不合规主机设备个数 VIEW_CHECKNUM VBSILEGALNUM
+	int32 UserCheckNum =5 ; //弱口令扫描主机数 VIEW_CHECKNUM USERCHECKNUM
+	int32 UserCheckIlegalNum =6;//弱口令扫描不合规主机数 VIEW_CHECKNUM USERCHECKILEGALNUM
+	int32 VEADTunnelNum = 7;//核查纵向隧道数 VIEW_CHECKNUM VEADTUNNELNUM
+	int32 VEADPolicyNum = 8;//核查纵向策略数 VIEW_CHECKNUM VEADPOLICYNUM
+	int32 VEADIlegalTunnelNum = 9;//核查纵向问题隧道数 VIEW_CHECKNUM VEADILEGALTUNNELNUM
+	int32 VEADIlegalPolicyNum = 10;//核查纵向问题策略数 VIEW_CHECKNUM VEADILEGALPOLICYNUM
+}
+
+// 国调告警监视本级  add by dongl
+message RunStateReply  {
+	AlarmMonitorVO alrmMonitor = 1;
+}
+
+//国调 告警监视本级  add by dongl  本级THREAT_GROUP_LOGSUBTYPE,REALTIME_WARNING连表查询
+message AlarmMonitorVO{
+  	int32 outThreatLocal = 1; //外部威胁
+  	int32 innerThreatLocal = 2; //主站威胁
+  	int32 externalDeviceLocal =3; //外设接入
+  	int32 exceptionLoginLocal = 4; //异常登录
+ 	int32 dangerhandleLocal =5; //高危操作
+ 	int32 outVisitLocal = 6;//外部访问
+}
+
+//全网告警监视  add by dongl
+message RunAllStateReply{
+	AlarmMonitorAll alrmMonitorAll = 1;
+} 	
+//全网告警监视  add by dongl 全网=下级+下级  下级:THREAT_GROUP_LOGSUBTYPE,REATTIME_SAFETYENENT连表查询
+message AlarmMonitorAll{
+ 	int32 outThreatAll = 1;//外部威胁
+ 	int32 innerThreatAll = 2;//主站威胁
+ 	int32 externalDeviceAll = 3;//外设接入
+ 	int32 exceptionLoginAll = 4;//异常登录
+ 	int32 dangerhandleAll =5;//高危操作
+ 	int32 outVisitAll =6; //外部访问
+ 	string name = 7;//标题啊名称显示全网名称还是下级名称
+}
+
+// The response message containing the greetings
+
+
+
+//安全事件本级结果返回
+message SecurityEventReply {
+	repeated SecurityEventGrpc securityEvents = 1;
+	//安全事件的总数
+	int64 nums = 2;
+	// 待解决事件数
+	int64 toSolvedNums = 3;
+}
+
+message SecurityEventGrpc {
+//序号
+	string index = 1;
+	//涉及单位
+	string department = 2;
+	//告警事件描述
+	string describe = 3;
+	//是否有最新的安全事件
+	bool eventFlag = 4;
+	//最新的发生时间
+	string warningTime = 5;
+	//告警是否解决状态（0：未解决，1：已解决）
+	string warningSloveState = 6;
+}
+
+
+//地图格式、返回用于画地图的数据
+message DrawingMapsForParameters {
+	repeated MapFormatSecurityArrayProtobuf securityArray = 1; //风险指标数组，用于画地图用
+	repeated MapFormatWarningArrayProtobuf warningArray = 2; //告警参数，用于画地图用
+}
+
+message MapFormatSecurityArrayProtobuf {
+	string name = 1; //区域名称
+	string value = 2; //风险指标
+}
+
+message MapFormatWarningArrayProtobuf {
+	string localprovince = 1; //目的地
+	string remoteprovince = 2; //原地
+	string cutprovince = 3; //截断城市
+	string warningstate = 4; //是否报警
+}
+//安防系统及设备在线状态
+message SecuritySystemStateForParameters {
+	repeated SecuritySystemStateProtobuf systemArray = 1; //设备数以及在线状态
+}
+
+message SecuritySystemStateProtobuf {
+	string name = 1; //设备名字
+	int32 value = 2; //数量
+	int32 flag = 3; //是否变红
+}
+// 大屏网络安全运行水平
+message ScreenSecretPassOnlineRateForParameters {
+	string allOnlineRate = 1; //全网在线率
+	string allSecretPass = 2; //全网密通率
+	string urgentWarningsCount = 3; //全网紧急告警数
+	string importantWarningsCount = 4; //全网重要告警数
+	string secrityDays = 5;//安全运行天数
+	repeated ScreenSecretPassOnlineRateProtobuf secretPassOnlineRateArray = 6; //在线率密通率
+	string onlineName = 7;//显示的名字是全网在线率还是辽宁省在线率
+	string secretPassName = 8; //显示的名字是全网密通率还是辽宁省密通率
+	string urgentWarningsName = 9; //显示的名字是全网紧急告警数还是辽宁省紧急告警数
+	string importantWarningsName = 10; //显示的名字是全网重要告警数还是辽宁省重要告警数
+	
+}
+
+message ScreenSecretPassOnlineRateProtobuf {
+	string name = 1; //在线率密通率
+	string color = 2; //颜色
+	repeated string time = 3; //时间
+	repeated string value = 4; //值
+}
+//当日风险top10
+message ScreenDayRiskTOPTenForParameters {
+	repeated ScreenDayRiskTOPTenProtobuf dayRiskTOPTenArray = 1; //风险数组
+}
+
+message ScreenDayRiskTOPTenProtobuf {
+	string key = 1; //名字
+	string value = 2; //次数
+}
+
+
+//空参数
+ message Void {
+} //地图格式、返回用于画地图的数据
+
+message OnDutyPersion{
+   repeated DutyPersion dutyPerson = 1;
+}
+
+message DutyPersion{
+   string position = 1;//员工职位 对应 OMS_DISPATCHERS position
+   string name = 2;//员工姓名 对应 OMS_DISPATCHERS name
+   string photoUrl=3; //员工图片名称 OMS_PERSONPHOTOREL PHOTOURL
+}
+
+message RiskWarningProto{
+   int32 count = 1;//风险预警总数
+   repeated RiskWarning riskWarn = 2; //风险预警列表
+}
+
+message RiskWarning{
+   string riskNo = 1;//预警编号
+   string riskLevel = 2; //预警级别
+   string riskName = 3; //预警名称
+   string riskRange = 4; //预警范围
+   string riskDate = 5;  //预警时间   
+}

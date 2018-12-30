@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>边界防护</title>
+  <link rel="stylesheet" href="./styles/layout.css">
+  <link rel="stylesheet" href="./styles/graph.css">
+</head>
+<body>
+  <div id="screen-bianjie">
+    <header class="screen-header">
+      <h1>边界防护</h1>
+    </header>
+    <main>
+      <section class="section-system">
+        <h3 class="section-title">安全防护体系</h3>
+        <div class="graph-body">
+          <div class="graph-system__stats">
+            <!-- 安全防护体系 环型静态图 -->
+            <extends src="./system-stats/index.html"></extends>
+          </div>
+          <div class="graph-system__figure-list">
+            <!-- 安防设备建设情况 -->
+            <extends src="./system-figure-list/index.html"></extends>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-analyse">
+        <div class="section-group__top10">
+          <h3 class="section-title">边界监视</h3>
+          <div class="graph-analyse__top10">
+            <!-- 密通情况top10 -->
+            <extends src="./analyse-top10/index.html"></extends>
+          </div>
+        </div>
+
+        <div class="section-group__chart">
+          <h3 class="section-title">边界分析</h3>
+          <div class="graph-analyse__chart">
+            <!-- 安全事件分析 -->
+            <extends src="./analyse-chart/index.html"></extends>
+          </div>
+        </div>
+
+        <div class="section-group__stats">
+          <div class="graph-analyse__stats">
+            <!-- 隔离告警消缺情况 -->
+            <extends src="./analyse-stats/index.html"></extends>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-audit">
+        <h3 class="section-title">边界审计</h3>
+        <div class="graph-body">
+          <div class="graph-audit__trend">
+            <!-- 趋势分析 -->
+            <extends src="./audit-trend/index.html"></extends>
+          </div>
+          <div class="graph-audit__piechart">
+            <!-- 变更次数 -->
+            <extends src="./audit-piechart/index.html"></extends>
+          </div>
+          <div class="graph-audit__top5">
+            <!-- Top5 -->
+            <extends src="./audit-top5/index.html"></extends>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-inspect">
+        <h3 class="section-title">边界核查</h3>
+        <div class="graph-body">
+          <div class="graph-inspect__summary">
+            <!-- 核查情况 -->
+            <extends src="./inspect-summary/index.html"></extends>
+          </div>
+          <div class="graph-inspect__table">
+            <!-- 隧道策略情况 -->
+            <extends src="./inspect-table/index.html"></extends>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

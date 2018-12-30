@@ -1,0 +1,28 @@
+
+.graph-analyse__top10 .gtable-bd-row:before {
+  background: linear-gradient(to right, #2C2C2C, #2C2C2C);
+}
+
+.graph-analyse__top10 .graph-inner {
+  height: 578px;
+}
+
+.graph-analyse__top10 .gtable-bd-row:after {
+  z-index: 1;
+  background: #1C1D1F;
+  --bw: 3px;
+  left: var(--bw); right: var(--bw); top: var(--bw); bottom: var(--bw);
+}
+
+
+.graph-analyse__top10 .gtable-hd-row:after {
+  --bw: 3px;
+}
+
+.graph-analyse__top10 .graph-inner-bd {
+  font-size: 1em;
+  color: #f9fbfc;
+}
+.graph-analyse__top10 .gtable-bd-row {
+  margin-top: .2em;
+}

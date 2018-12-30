@@ -1,0 +1,22 @@
+.graph-system__figure-list {
+    height: 100%;
+    position: relative;
+}
+
+#system-figure-list-container {
+    position: relative;
+    height: 100%;
+}
+
+#system-figure-list-container .title {
+    padding: 15px 0 0 25px;
+    font-size: 25px;
+    /*position: absolute;*/
+}
+
+#system-figure-list-container #figure-list {
+    /*position: static;*/
+    height: 100%;
+    width: auto;
+    margin: 5px 10px;
+}

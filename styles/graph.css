@@ -1,0 +1,16 @@
+.graph-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.graph-inner-bd {
+  flex: 1;
+}
+
+.graph-inner h6 {
+  font-size: 24px;;
+  font-weight: normal;
+  padding-left: 30px;
+  background: url('../images/graph-inner-title.png') 0 center no-repeat;
+  background-size: auto 80%;
+}
