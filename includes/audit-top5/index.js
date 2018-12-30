@@ -6,7 +6,7 @@ $(function(){
 	var div_s = $(".alarmAudit_top");
 	var myChart = echarts.init(div_s[0]);
 	
-	option = {
+var	option = {
     title: {
       show:false,
     },
